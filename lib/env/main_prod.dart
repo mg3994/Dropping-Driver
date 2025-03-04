@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import '../../../../app/app.dart';
 import '../../../../common/common.dart';
 import '../../../../env/flavor_config.dart';
-
+import '../common/app_constants.dart';
 Future<void> main() async {
   const values = FlavorValues(
-    baseUrl: '',
+    baseUrl: AppConstants.baseUrl,
     logNetworkInfo: true,
     authProvider: ' ',
   );
