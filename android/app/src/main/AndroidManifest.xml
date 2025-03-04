@@ -48,7 +48,7 @@
   </queries>
   <!--#enddocregion android-queries-->
     <application
-        android:label="product name"
+        android:label="DroppingRide"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:enableOnBackInvokedCallback="true">
@@ -92,7 +92,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/Ucrop.CropTheme"/>
         <meta-data android:name="com.google.android.geo.API_KEY"
-               android:value="Your Map Key Here"/>
+               android:value="AIzaSyAoi9wM6k_nXs7W6-5CLv3MuoEDuWoiRcA"/>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data
@@ -113,6 +113,6 @@
             <action android:name="android.intent.action.PROCESS_TEXT"/>
             <data android:mimeType="text/plain"/>
         </intent>
-        <package android:name="package name here" />
+        <package android:name="com.droppingride.driver" />
     </queries>
 </manifest>

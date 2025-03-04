@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 
 class NativeService {
   
-  static var platform = MethodChannel('package name here');
+  static var platform = MethodChannel('com.droppingride.driver');
 
   // Initialize the service
   Future<void> initService({

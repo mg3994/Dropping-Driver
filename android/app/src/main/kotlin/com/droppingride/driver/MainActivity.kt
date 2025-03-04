@@ -42,7 +42,7 @@ class MainActivity : FlutterActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        channel = MethodChannel(flutterEngine!!.dartExecutor.binaryMessenger, "package name here")
+        channel = MethodChannel(flutterEngine!!.dartExecutor.binaryMessenger, "com.droppingride.driver")
         channel.setMethodCallHandler(object : MethodCallHandler {
             @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
             override fun onMethodCall(call: MethodCall, result: Result) {

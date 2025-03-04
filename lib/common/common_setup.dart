@@ -29,8 +29,8 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
     if (Platform.isAndroid) {
       AndroidIntent intent = AndroidIntent(
         action: 'action_view',
-        package: 'package name here',
-        componentName: 'package name here.MainActivity',
+        package: 'com.droppingride.driver',
+        componentName: 'com.droppingride.driver.MainActivity',
       );
       await intent.launch();
     }
