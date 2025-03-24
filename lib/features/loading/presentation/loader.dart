@@ -62,6 +62,7 @@ class _LoaderPageState extends State<LoaderPage> with WidgetsBindingObserver {
                       }
                     }
                   } else {
+                    
                     Navigator.pushNamedAndRemoveUntil(
                         context, HomePage.routeName, (route) => false);
                   }
