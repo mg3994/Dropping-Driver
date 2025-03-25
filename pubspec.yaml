@@ -111,10 +111,12 @@ dependencies:
   #Avatarglow
   avatar_glow: ^3.0.1
   latlong2: ^0.9.1
+  dotted_line: ^3.2.3
 
 dependency_overrides:
 #  wake_lock package depend on package_info latest version but we used lower version so it ovverride
   package_info_plus: ^4.1.0
+  # vibration: ^3.1.3
 
 dev_dependencies:
   flutter_test:

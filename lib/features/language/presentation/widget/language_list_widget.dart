@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,7 +28,7 @@ class LanguageListWidget extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.symmetric(
-                        vertical: 5.0, horizontal: 8),
+                        vertical: 4.0, horizontal: 8),
                     child: InkWell(
                       onTap: () {
                         context.read<LanguageBloc>().add(
@@ -42,14 +43,14 @@ class LanguageListWidget extends StatelessWidget {
                         height: 50,
                         width: size.width,
                         decoration: BoxDecoration(
-                          color: AppColors.grey,
+                          color: Theme.of(context).cardColor,
                           borderRadius: BorderRadius.circular(5),
                           border: Border.all(
                               color:
                                   (context.read<LanguageBloc>().selectedIndex ==
                                           index)
-                                      ? AppColors.black
-                                      : AppColors.white,
+                                      ? Theme.of(context).primaryColor
+                                      : Theme.of(context).dialogBackgroundColor,
                               width:
                                   (context.read<LanguageBloc>().selectedIndex ==
                                           index)
@@ -60,14 +61,42 @@ class LanguageListWidget extends StatelessWidget {
                           padding: const EdgeInsets.only(left: 10.0),
                           child: Align(
                             alignment: Alignment.centerLeft,
-                            child: MyText(
-                              text: languageList[index].name,
-                              textStyle: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .copyWith(
-                                    color: AppColors.blackText,
-                                  ),
+                            child: Row(
+                              spacing: 4,
+                              children: [
+                                CachedNetworkImage(imageUrl: 
+                            languageList[index].flag,
+                                height: 22,
+                                width:35,
+                                // placeholder: (context, url) {
+                                //   return const Icon(Icons.error);
+                                // },
+                                errorWidget: (context, url, error) {
+                                  return const Icon(Icons.error);
+                                },
+                                progressIndicatorBuilder: (context, url, progress) {
+                                    return Center(
+                                    child: SizedBox(
+                                      height: 12,
+                                      width: 12,
+                                      child: CircularProgressIndicator(
+                                      strokeWidth: 1.5,
+                                      value: progress.progress,
+                                      ),
+                                    ),
+                                    );
+                                },
+                              ),
+                                MyText(
+                                  text: languageList[index].name,
+                                  textStyle: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge!
+                                      .copyWith(
+                                        color: AppColors.blackText,
+                                      ),
+                                ),
+                              ],
                             ),
                           ),
                         ),

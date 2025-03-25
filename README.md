@@ -1,3 +1,11 @@
+# Flutter version Used 
+> 3.27.4 (Everything as mentoned in Docs)
+# JDK version
+> 21
+# Gradle Distribution
+> 8.9
+
+
 # TODO
 > Ios Related Setup remains
 

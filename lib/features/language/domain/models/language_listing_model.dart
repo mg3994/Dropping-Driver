@@ -27,30 +27,36 @@ class LanguageListResponseModel {
 class LanguageList {
   String lang;
   String name;
+  String flag;
 
   LanguageList({
     required this.lang,
     required this.name,
+    required this.flag,
   });
 
   factory LanguageList.fromJson(Map<String, dynamic> json) => LanguageList(
         lang: json["lang"],
         name: json["name"],
+          flag: json["flag"]??'',
       );
 }
 
 class LocaleLanguageList {
   String lang;
   String name;
+  String flag;
 
   LocaleLanguageList({
     required this.lang,
     required this.name,
+     required this.flag,
   });
 
   factory LocaleLanguageList.fromJson(Map<String, dynamic> json) =>
       LocaleLanguageList(
         lang: json["lang"] ?? '',
         name: json["name"] ?? '',
+         flag: json["flag"] ?? '',
       );
 }

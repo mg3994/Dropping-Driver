@@ -1,3 +1,4 @@
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restart_tagxi/common/app_arguments.dart';
@@ -41,8 +42,9 @@ class SelectUserPage extends StatelessWidget {
               top: false,
               bottom: true,
               child: Scaffold(
-                body: CustomBackground(
-                  child: Column(
+                body:
+                //  CustomBackground(child: 
+                Column(
                     children: [
                       Image.asset(
                         AppImages.loginAs,
@@ -53,15 +55,29 @@ class SelectUserPage extends StatelessWidget {
                       const SizedBox(height: 20),
                       SizedBox(
                         width: size.width * 0.9,
-                        child: MyText(
-                          text:
-                              '${AppLocalizations.of(context)!.selectAccountType} :',
-                          textStyle: Theme.of(context)
-                              .textTheme
-                              .bodyLarge!
-                              .copyWith(
-                                  color: AppColors.blackText,
-                                  fontWeight: FontWeight.bold),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          spacing:4,
+                          children: [
+                            MyText(
+                              text:
+                                  '${AppLocalizations.of(context)!.selectAccountType} :',
+                              textStyle: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .copyWith(
+                                     
+                                      fontWeight: FontWeight.bold),
+                            ),
+                              DottedLine( // ADDED: BY MG: Dotted line
+                         dashLength: 2,
+                          dashGapLength: 2,
+                          dashRadius: 1,
+                          lineThickness: 1,
+                          dashColor: Theme.of(context).dividerColor,
+                        ),
+                          ],
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -70,28 +86,32 @@ class SelectUserPage extends StatelessWidget {
                           child: Column(
                             children: [
                               Material(
-                                borderRadius: BorderRadius.circular(12),
+                                borderRadius: BorderRadius.circular(4),
                                 color: Colors.transparent,
                                 child: InkWell(
                                   splashColor: AppColors.black.withOpacity(0.2),
-                                  borderRadius: BorderRadius.circular(12),
+                                  borderRadius: BorderRadius.circular(4),
                                   onTap: () {
                                     context.read<AuthBloc>().add(
                                         ChooseLoginAsEvent(loginAs: 'driver'));
                                   },
                                   child: Ink(
-                                    padding: EdgeInsets.all(size.width * 0.05),
+                                    padding: EdgeInsets.all(size.width * 0.03),
                                     width: size.width * 0.9,
                                     decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(12),
+                                        borderRadius: BorderRadius.circular(4),
                                         border: Border.all(
-                                            color:
-                                                AppColors.black.withOpacity(0.5)),
+                                          width: 2,
+                                            color: 
+                                              (context
+                                                    .read<AuthBloc>()
+                                                    .choosenLoginAs ==
+                                                'driver')?Theme.of(context).primaryColor :Theme.of(context).dividerColor.withOpacity(0.5)),
                                         color: (context
                                                     .read<AuthBloc>()
                                                     .choosenLoginAs ==
                                                 'driver')
-                                            ? AppColors.black.withOpacity(0.1)
+                                            ? Theme.of(context).primaryColor.withOpacity(0.2)
                                             : Colors.transparent),
                                     child: Row(
                                       children: [
@@ -107,18 +127,26 @@ class SelectUserPage extends StatelessWidget {
                                                   .textTheme
                                                   .bodyLarge!
                                                   .copyWith(
-                                                      color: AppColors.blackText,
+                                                      // color: AppColors.blackText,
                                                       fontWeight:
                                                           FontWeight.bold),
                                             ),
+                                                 DottedLine( // ADDED: BY MG: Dotted line
+                         dashLength: 2,
+                          dashGapLength: 2,
+                          dashRadius: 1,
+                          lineThickness: 1,
+                          dashColor: Theme.of(context).dividerColor,
+                        ),
                                             MyText(
                                               text: AppLocalizations.of(context)!
                                                   .driverSubHeading,
                                               textStyle: Theme.of(context)
                                                   .textTheme
-                                                  .bodySmall!
+                                                  .labelSmall!
                                                   .copyWith(
-                                                      color: AppColors.blackText,
+                                                      // color: AppColors.blackText,
+                                                      color: Theme.of(context).textTheme.labelSmall?.color?.withOpacity(0.6),
                                                       fontWeight:
                                                           FontWeight.normal),
                                             ),
@@ -126,10 +154,14 @@ class SelectUserPage extends StatelessWidget {
                                         )),
                                         const SizedBox(width: 20),
                                         Container(
-                                          height: size.width * 0.06,
-                                          width: size.width * 0.06,
+                                          height: size.width * 0.09,
+                                          width: size.width * 0.09,
                                           decoration: BoxDecoration(
-                                              color: AppColors.white,
+                                            border: (context
+                                                      .read<AuthBloc>()
+                                                      .choosenLoginAs ==
+                                                  'driver') ? Border.all(color: Theme.of(context).primaryColor, width: 2) : null,
+                                               color: Theme.of(context).cardColor,
                                               shape: BoxShape.circle,
                                               boxShadow: [
                                                 BoxShadow(
@@ -146,8 +178,8 @@ class SelectUserPage extends StatelessWidget {
                                                   'driver')
                                               ? Icon(
                                                   Icons.done,
-                                                  color: AppColors.black,
-                                                  size: size.width * 0.04,
+                                                  color: Theme.of(context).primaryColor,
+                                                  size: size.width * 0.06,
                                                 )
                                               : Container(),
                                         )
@@ -158,28 +190,33 @@ class SelectUserPage extends StatelessWidget {
                               ),
                               const SizedBox(height: 20),
                               Material(
-                                borderRadius: BorderRadius.circular(12),
+                                borderRadius: BorderRadius.circular(4),
                                 color: Colors.transparent,
                                 child: InkWell(
                                   splashColor: AppColors.black.withOpacity(0.2),
-                                  borderRadius: BorderRadius.circular(12),
+                                  borderRadius: BorderRadius.circular(4),
                                   onTap: () {
                                     context.read<AuthBloc>().add(
                                         ChooseLoginAsEvent(loginAs: 'owner'));
                                   },
                                   child: Ink(
-                                    padding: EdgeInsets.all(size.width * 0.05),
+                                    padding: EdgeInsets.all(size.width * 0.03),
                                     width: size.width * 0.9,
                                     decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(12),
+                                      
+                                        borderRadius: BorderRadius.circular(4),
                                         border: Border.all(
+                                          width: 2,
                                             color:
-                                                AppColors.black.withOpacity(0.5)),
+                                                (context
+                                                    .read<AuthBloc>()
+                                                    .choosenLoginAs ==
+                                                'owner')?Theme.of(context).primaryColor :Theme.of(context).dividerColor.withOpacity(0.5)),
                                         color: (context
                                                     .read<AuthBloc>()
                                                     .choosenLoginAs ==
                                                 'owner')
-                                            ? AppColors.black.withOpacity(0.1)
+                                            ? Theme.of(context).primaryColor.withOpacity(0.2)
                                             : Colors.transparent),
                                     child: Row(
                                       children: [
@@ -199,14 +236,21 @@ class SelectUserPage extends StatelessWidget {
                                                       fontWeight:
                                                           FontWeight.bold),
                                             ),
+                                              DottedLine( // ADDED: BY MG: Dotted line
+                         dashLength: 2,
+                          dashGapLength: 2,
+                          dashRadius: 1,
+                          lineThickness: 1,
+                          dashColor: Theme.of(context).dividerColor,
+                        ),
                                             MyText(
                                               text: AppLocalizations.of(context)!
                                                   .ownerSubHeading,
                                               textStyle: Theme.of(context)
                                                   .textTheme
-                                                  .bodySmall!
+                                                  .labelSmall!
                                                   .copyWith(
-                                                      color: AppColors.blackText,
+                                                      color: Theme.of(context).textTheme.labelSmall?.color?.withOpacity(0.6),
                                                       fontWeight:
                                                           FontWeight.normal),
                                             ),
@@ -214,10 +258,15 @@ class SelectUserPage extends StatelessWidget {
                                         )),
                                         const SizedBox(width: 20),
                                         Container(
-                                          height: size.width * 0.06,
-                                          width: size.width * 0.06,
+                                          height: size.width * 0.09,
+                                          width: size.width * 0.09,
+                                          
                                           decoration: BoxDecoration(
-                                              color: AppColors.white,
+                                             border: (context
+                                                    .read<AuthBloc>()
+                                                    .choosenLoginAs ==
+                                                'owner') ? Border.all(color: Theme.of(context).primaryColor, width: 2) : null,
+                                              color: Theme.of(context).cardColor,
                                               shape: BoxShape.circle,
                                               boxShadow: [
                                                 BoxShadow(
@@ -234,8 +283,8 @@ class SelectUserPage extends StatelessWidget {
                                                   'owner')
                                               ? Icon(
                                                   Icons.done,
-                                                  color: AppColors.black,
-                                                  size: size.width * 0.04,
+                                                  color: Theme.of(context).primaryColor,
+                                                  size: size.width * 0.06,
                                                 )
                                               : Container(),
                                         )
@@ -273,7 +322,7 @@ class SelectUserPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                ),
+                // ),
               ),
             );
           },

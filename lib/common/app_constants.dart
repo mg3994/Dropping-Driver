@@ -26,10 +26,10 @@ class AppConstants {
   static String packageName = '';
   static String signKey = '';
   static List<LocaleLanguageList> languageList = [
-    LocaleLanguageList(name: 'English', lang: 'en'),
-    LocaleLanguageList(name: 'Arabic', lang: 'ar'),
-    LocaleLanguageList(name: 'French', lang: 'fr'),
-    LocaleLanguageList(name: 'Spanish', lang: 'es')
+    LocaleLanguageList(name: 'English', lang: 'en',flag: '${baseUrl}image/country/flags/US.png'),
+    // LocaleLanguageList(name: 'Arabic', lang: 'ar'),
+    LocaleLanguageList(name: 'French', lang: 'fr',flag: '${baseUrl}image/country/flags/FR.png'),
+    // LocaleLanguageList(name: 'Spanish', lang: 'es')
   ];
   double headerSize = 18.0;
   double subHeaderSize = 16.0;

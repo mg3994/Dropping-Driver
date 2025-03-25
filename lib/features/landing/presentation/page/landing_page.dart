@@ -75,7 +75,7 @@ class _LandingPageState extends State<LandingPage> {
                                     color: Theme.of(context).primaryColor,
                                   ),
                                 ),
-                                SizedBox(height: size.height * 0.15),
+                                SizedBox(height: size.height * 0.19),
                                 LandingContentWidget(cont: context),
                                 SizedBox(height: size.height * 0.02),
                                 LandingSkipButtonWidget(cont:context),

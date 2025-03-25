@@ -11,6 +11,8 @@ import '../../../../l10n/app_localizations.dart';
 import '../../../loading/presentation/loader.dart';
 import '../../application/language_bloc.dart';
 import '../widget/language_list_widget.dart';
+import 'package:dotted_line/dotted_line.dart'; // Add this package // ADDED: BY MG: Dotted line
+
 
 class ChooseLanguagePage extends StatelessWidget {
   static const String routeName = '/chooseLanguage';
@@ -78,15 +80,17 @@ class ChooseLanguagePage extends StatelessWidget {
                           ],
                         ),
                       )
-                    : Container(
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(AppImages.bg),
-                            // Path to your image
-                            fit: BoxFit.cover, // Adjust the image fit as needed
-                          ),
-                        ),
-                        child: Padding(
+                    :
+                    //  Container( 
+                        // decoration: BoxDecoration(
+                        //   image: DecorationImage(
+                        //     image: AssetImage(AppImages.bg),
+                        //     // Path to your image
+                        //     fit: BoxFit.cover, // Adjust the image fit as needed
+                        //   ),
+                        // ),
+                        // child: 
+                        Padding(
                           padding: const EdgeInsets.all(20),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -130,15 +134,26 @@ class ChooseLanguagePage extends StatelessWidget {
                                           .textTheme
                                           .titleLarge!
                                           .copyWith(
-                                              color: AppColors.blackText,
-                                              fontSize: 18)),
+                                              // color: AppColors.blackText,
+                                              fontSize: 14,fontWeight: FontWeight.bold)),
                                 ],
+                              ), 
+                              SizedBox(height: 2,),//Added: By MG:
+                              DottedLine( // ADDED: BY MG: Dotted line
+                         dashLength: 2,
+                          dashGapLength: 2,
+                          dashRadius: 1,
+                          lineThickness: 1,
+                          dashColor: Theme.of(context).dividerColor,
+                        ),
+                              // SizedBox(height: size.width * 0.000001),
+                              Expanded(
+                                child:
+                                 LanguageListWidget(
+                                    languageList: AppConstants.languageList,
+                                    cont: context),
                               ),
-                              SizedBox(height: size.width * 0.02),
-                              LanguageListWidget(
-                                  languageList: AppConstants.languageList,
-                                  cont: context),
-                              SizedBox(height: size.width * 0.05),
+                              // SizedBox(height: size.width * 0.05),
                               Center(
                                 child: CustomButton(
                                   buttonName:
@@ -162,7 +177,7 @@ class ChooseLanguagePage extends StatelessWidget {
                             ],
                           ),
                         ),
-                      ),
+                      // ),
               ),
             );
           },
