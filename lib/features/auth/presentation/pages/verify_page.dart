@@ -1,11 +1,13 @@
 import 'dart:async';
 
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:restart_tagxi/common/app_constants.dart';
 import 'package:restart_tagxi/core/model/user_detail_model.dart';
+import 'package:restart_tagxi/core/utils/custom_card.dart';
 import 'package:restart_tagxi/features/driverprofile/presentation/pages/driver_profile_pages.dart';
 import '../../../../common/common.dart';
 import '../../../../core/utils/custom_background.dart';
@@ -138,8 +140,9 @@ class _VerifyPageState extends State<VerifyPage>
               },
               child: Scaffold(
                 resizeToAvoidBottomInset: true,
-                body: CustomBackground(
-                  child: SafeArea(
+                body:
+                //  CustomBackground(child: 
+                 SafeArea(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Column(
@@ -155,10 +158,11 @@ class _VerifyPageState extends State<VerifyPage>
                                   textAlign: TextAlign.center,
                                   textStyle: Theme.of(context)
                                       .textTheme
-                                      .bodyMedium!
+                                     .labelSmall!
                                       .copyWith(
-                                        color: AppColors.blackText,
-                                      ),
+                                        color:Theme.of(context).disabledColor,
+                                      )
+                                      ,
                                 )
                               : MyText(
                                   text: AppLocalizations.of(context)!
@@ -166,70 +170,89 @@ class _VerifyPageState extends State<VerifyPage>
                                   textAlign: TextAlign.center,
                                   textStyle: Theme.of(context)
                                       .textTheme
-                                      .bodyMedium!
+                                      .labelSmall!
                                       .copyWith(
-                                        color: AppColors.blackText,
-                                      ),
+                                         color:Theme.of(context).disabledColor,
+                                      )
+                                      ,
                                 ),
                           const SizedBox(height: 20),
-                          Wrap(
-                            alignment: WrapAlignment.center,
-                            crossAxisAlignment: WrapCrossAlignment.center,
-                            children: [
-                              if (!widget.arg.isLoginByEmail)
-                                SizedBox(
-                                  height: 20,
-                                  width: 30,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(5),
-                                    child: Image.network(
-                                      widget.arg.countryFlag,
-                                      fit: BoxFit.fill,
+                          CustomCard(
+                            child: Column(
+                               crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Wrap(
+                                  alignment: WrapAlignment.center,
+                                  crossAxisAlignment: WrapCrossAlignment.center,
+                                  children: [
+                                    if (!widget.arg.isLoginByEmail)
+                                      SizedBox(
+                                        height: 20,
+                                        width: 30,
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.circular(1.0),
+                                          child: Image.network(
+                                            widget.arg.countryFlag,
+                                            fit: BoxFit.fill,
+                                          ),
+                                        ),
+                                      ),
+                                    const SizedBox(width: 10),
+                                    MyText(
+                                      text: widget.arg.mobileOrEmail,
+                                      textStyle: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium!
+                                          .copyWith(
+                                            // color: AppColors.blackText,
+                                             fontWeight: FontWeight.bold,
+                                          ),
                                     ),
-                                  ),
-                                ),
-                              const SizedBox(width: 10),
-                              MyText(
-                                text: widget.arg.mobileOrEmail,
-                                textStyle: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(
-                                      color: AppColors.blackText,
+                                    const SizedBox(width: 10),
+                                    InkWell(
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: MyText(
+                                        text: AppLocalizations.of(context)!.change,
+                                        textStyle: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall!
+                                            .copyWith(
+                                                color: Theme.of(context).disabledColor,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 14),
+                                      ),
                                     ),
-                              ),
-                              const SizedBox(width: 10),
-                              InkWell(
-                                onTap: () {
-                                  Navigator.pop(context);
-                                },
-                                child: MyText(
-                                  text: AppLocalizations.of(context)!.change,
-                                  textStyle: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall!
-                                      .copyWith(
-                                          color: AppColors.blackText,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 14),
+                                  ],
                                 ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 30),
+                                   const SizedBox(height: 10),
+
+                                  DottedLine( // ADDED: BY MG: Dotted line
+                         dashLength: 2,
+                          dashGapLength: 2,
+                          dashRadius: 1,
+                          lineThickness: 1,
+                          dashColor: Theme.of(context).dividerColor,
+                        ),
+                                   const SizedBox(height: 20),
                           if (widget.arg.userExist &&
                               !context.read<AuthBloc>().isOtpVerify)
                             passwordField(context),
                           if (!widget.arg.userExist ||
                               context.read<AuthBloc>().isOtpVerify)
                             buildPinField(context),
-                          const SizedBox(height: 20),
+                         
+                              ],
+                            ),
+                          ),
+                        const SizedBox(height: 20),
                           buildLoginButton(context),
                         ],
                       ),
                     ),
                   ),
-                ),
+                // ),
               ),
             );
           },
@@ -248,8 +271,8 @@ class _VerifyPageState extends State<VerifyPage>
             MyText(
               text: AppLocalizations.of(context)!.password,
               textStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  color: AppColors.blackText,
-                  fontSize: AppConstants().subHeaderSize),
+                  // color: AppColors.blackText,
+                  fontSize: 12),
             ),
             InkWell(
               onTap: () {
@@ -267,7 +290,10 @@ class _VerifyPageState extends State<VerifyPage>
               child: MyText(
                 text: AppLocalizations.of(context)!.signUsingOtp,
                 textStyle: Theme.of(context).textTheme.bodySmall!.copyWith(
-                    fontWeight: FontWeight.w600, color: AppColors.blackText),
+                    fontWeight: FontWeight.w600, 
+                    // color: AppColors.blackText
+                     fontSize: 12
+                    ),
               ),
             ),
           ],
@@ -328,8 +354,11 @@ class _VerifyPageState extends State<VerifyPage>
             MyText(
               text: AppLocalizations.of(context)!.enterOtp,
               textStyle: Theme.of(context).textTheme.bodySmall!.copyWith(
-                  color: AppColors.blackText,
-                  fontSize: AppConstants().subHeaderSize),
+                  // color: AppColors.blackText,
+                  // fontSize: AppConstants().subHeaderSize
+                   fontSize: 12,
+                   fontWeight: FontWeight.bold
+                  ),
             ),
             if (widget.arg.userExist &&
                 context.read<AuthBloc>().timerDuration == 0)
@@ -359,20 +388,20 @@ class _VerifyPageState extends State<VerifyPage>
           animationType: AnimationType.fade,
           pinTheme: PinTheme(
             shape: PinCodeFieldShape.box,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(2),
             fieldHeight: 45,
             fieldWidth: 45,
-            activeFillColor: Theme.of(context).scaffoldBackgroundColor,
-            inactiveFillColor: Theme.of(context).scaffoldBackgroundColor,
-            inactiveColor: Theme.of(context).scaffoldBackgroundColor,
-            selectedFillColor: Theme.of(context).scaffoldBackgroundColor,
+            activeFillColor: Theme.of(context).cardColor,
+            inactiveFillColor: Theme.of(context).cardColor,
+            inactiveColor: Theme.of(context).dividerColor,
+            selectedFillColor: Theme.of(context).cardColor,
             selectedColor: Theme.of(context).disabledColor,
-            selectedBorderWidth: 1,
-            inactiveBorderWidth: 1,
-            activeBorderWidth: 1,
-            activeColor: Theme.of(context).scaffoldBackgroundColor,
+            selectedBorderWidth: 1.5,
+            inactiveBorderWidth: 1.5,
+            activeBorderWidth: 1.5,
+            activeColor: Theme.of(context).dividerColor,
           ),
-          cursorColor: Theme.of(context).dividerColor,
+          cursorColor: Theme.of(context).primaryColorDark,
           animationDuration: const Duration(milliseconds: 300),
           enableActiveFill: true,
           enablePinAutofill: false,
@@ -391,7 +420,7 @@ class _VerifyPageState extends State<VerifyPage>
             FilteringTextInputFormatter.digitsOnly,
           ],
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 6),
         InkWell(
           onTap: context.read<AuthBloc>().timerDuration != 0
               ? null
@@ -414,10 +443,11 @@ class _VerifyPageState extends State<VerifyPage>
             textStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   color: context.read<AuthBloc>().timerDuration != 0
                       ? Theme.of(context).disabledColor
-                      : AppColors.blackText,
+                      : Theme.of(context).primaryColorDark,
                 ),
           ),
         ),
+        const SizedBox(height: 6),
       ],
     );
   }
@@ -428,8 +458,8 @@ class _VerifyPageState extends State<VerifyPage>
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
           child: CustomButton(
-            borderRadius: 10,
-            height: MediaQuery.of(context).size.height * 0.06,
+            borderRadius: 4,
+            height: MediaQuery.of(context).size.height * 0.07,
             buttonName: (!widget.arg.userExist)
                 ? AppLocalizations.of(context)!.signup
                 : AppLocalizations.of(context)!.login,

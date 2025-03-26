@@ -1,5 +1,6 @@
 class AppImages {
   // Images
+   static const String logo = 'assets/images/logo.png'; // Added By MG:
   static const String backGroundImage = 'assets/images/background.png';
   static const String splash1 = 'assets/images/tagxi_splash.png';
   static const String splash2 = 'assets/images/delivery_splash.png';

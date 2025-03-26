@@ -90,7 +90,7 @@ class _LoaderPageState extends State<LoaderPage> with WidgetsBindingObserver {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Image.asset(
-                              AppImages.loader,
+                              AppImages.logo,
                               width: size.width * 0.8,
                               height: size.height * 0.6,
                             )

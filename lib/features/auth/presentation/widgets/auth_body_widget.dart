@@ -11,15 +11,17 @@ import '../../application/auth_bloc.dart';
 
 class AuthBodyWidget extends StatelessWidget {
   final BuildContext cont;
-  const AuthBodyWidget({super.key, required this.cont});
+   final List<Widget>? children;
+  const AuthBodyWidget({super.key, required this.cont, this.children});
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
     return BlocProvider.value(value: cont.read<AuthBloc>(),
     child: BlocBuilder<AuthBloc,AuthState>(builder: (context, state) {
-      return CustomBackground(
-      child: SingleChildScrollView(
+      return 
+      // CustomBackground(child: 
+      SingleChildScrollView(
         child: Column(
           children: [
             SafeArea(
@@ -50,11 +52,14 @@ class AuthBodyWidget extends StatelessWidget {
                                   .bodyMedium!
                                   .copyWith(
                                       fontWeight: FontWeight.bold,
-                                      color: Theme.of(context).primaryColor)),
+                                      // color: Theme.of(context).primaryColor
+                                      )),
                           Icon(Icons.language_outlined,
-                              color: Theme.of(context).primaryColor),
+                              // color: Theme.of(context).primaryColor
+                              ),
                           Icon(Icons.arrow_drop_down,
-                              color: Theme.of(context).primaryColor),
+                              // color: Theme.of(context).primaryColor
+                              ),
                         ],
                       ),
                     )
@@ -63,7 +68,7 @@ class AuthBodyWidget extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: size.height * 0.6,
+              height: size.height * 0.5,
               child: Center(
                 child: CarouselSlider(
                   items: context.read<AuthBloc>().splashImages,
@@ -86,10 +91,15 @@ class AuthBodyWidget extends StatelessWidget {
                 ),
               ),
             ),
+            
+            Column(
+              children: children ?? [],
+            ),
           ],
         ),
-      ),
-    );
+      )
+      // ,)
+      ;
   
     },));
   }

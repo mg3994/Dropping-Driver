@@ -108,7 +108,7 @@ class CustomTextField extends StatelessWidget {
         suffix: suffix,
         suffixIcon: suffixIcon,
         contentPadding: contentPadding ??
-            const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+            const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
         hintText: hintText,
         hintStyle: hintTextStyle ??
             Theme.of(context).textTheme.bodyMedium!.copyWith(
@@ -120,7 +120,7 @@ class CustomTextField extends StatelessWidget {
         errorStyle: TextStyle(
           color: AppColors.red.withOpacity(0.8),
           fontWeight: FontWeight.bold,
-          fontSize: 13,
+          fontSize: 9,
         ),
         labelText: labelText,
         labelStyle: labelStyle ??
